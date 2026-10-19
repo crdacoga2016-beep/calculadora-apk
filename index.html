@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0f17">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="calculator">
+
+        <!-- Barra superior con botón de historial -->
+        <header class="top-bar">
+            <button type="button" class="icon-btn" id="historyBtn" aria-label="Ver historial">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3v5h5"></path>
+                    <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"></path>
+                    <path d="M12 7v5l3 3"></path>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Pantallas -->
+        <section class="display">
+            <div class="expression-display" id="expression"></div>
+            <div class="result-display" id="display">0</div>
+        </section>
+
+        <!-- Teclado -->
+        <section class="buttons" id="buttons">
+
+            <button type="button" class="btn fn" data-action="clear" aria-label="Limpiar todo">AC</button>
+            <button type="button" class="btn fn" data-action="back" aria-label="Borrar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 4H8l-7 8 7 8h13a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1z"></path>
+                    <line x1="18" y1="9" x2="12" y2="15"></line>
+                    <line x1="12" y1="9" x2="18" y2="15"></line>
+                </svg>
+            </button>
+            <button type="button" class="btn fn" data-action="paren" aria-label="Paréntesis">( )</button>
+            <button type="button" class="btn op" data-value="÷">÷</button>
+
+            <button type="button" class="btn num" data-value="7">7</button>
+            <button type="button" class="btn num" data-value="8">8</button>
+            <button type="button" class="btn num" data-value="9">9</button>
+            <button type="button" class="btn op" data-value="×">×</button>
+
+            <button type="button" class="btn num" data-value="4">4</button>
+            <button type="button" class="btn num" data-value="5">5</button>
+            <button type="button" class="btn num" data-value="6">6</button>
+            <button type="button" class="btn op" data-value="−">−</button>
+
+            <button type="button" class="btn num" data-value="1">1</button>
+            <button type="button" class="btn num" data-value="2">2</button>
+            <button type="button" class="btn num" data-value="3">3</button>
+            <button type="button" class="btn op" data-value="+">+</button>
+
+            <button type="button" class="btn num" data-value="0">0</button>
+            <button type="button" class="btn num" data-value="00">00</button>
+            <button type="button" class="btn num" data-value=".">.</button>
+            <button type="button" class="btn eq" data-action="equals">=</button>
+
+        </section>
+
+        <!-- Panel de historial -->
+        <section class="history-panel" id="historyPanel" aria-hidden="true">
+            <header class="history-header">
+                <h2>Historial</h2>
+                <button type="button" class="text-btn" id="clearHistory">Borrar</button>
+                <button type="button" class="icon-btn" id="closeHistory" aria-label="Cerrar historial">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </header>
+            <div class="history-list" id="historyList"></div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+:root {
+    --bg-deep: #070a10;
+    --text: #ffffff;
+    --text-dim: rgba(255, 255, 255, 0.45);
+    --btn-num: rgba(255, 255, 255, 0.07);
+    --btn-num-active: rgba(255, 255, 255, 0.18);
+    --btn-fn: rgba(255, 255, 255, 0.13);
+    --btn-fn-active: rgba(255, 255, 255, 0.24);
+    --accent: #4ecdc4;
+    --accent-soft: rgba(78, 205, 196, 0.16);
+    --accent-soft-active: rgba(78, 205, 196, 0.32);
+    --panel-bg: #0e131d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: radial-gradient(circle at 20% 0%, #1b2740 0%, #0b0f17 55%, var(--bg-deep) 100%);
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ---------------- Contenedor ---------------- */
+
+.calculator {
+    position: relative;                 /* ancla para el panel de historial */
+    width: 100%;
+    max-width: 400px;
+    height: calc(100vh - 20px);
+    height: calc(100dvh - 20px);
+    max-height: 820px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 16px 22px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 28px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+}
+
+/* ---------------- Barra superior ---------------- */
+
+.top-bar {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 32px;
+}
+
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: background 0.12s ease, color 0.12s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.icon-btn:active {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
+}
+
+.icon-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* ---------------- Pantallas ---------------- */
+
+.display {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 6px 12px 10px;
+    overflow: hidden;
+}
+
+.expression-display {
+    min-height: 26px;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    color: var(--text-dim);
+    text-align: right;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    font-variant-numeric: tabular-nums;
+}
+
+.result-display {
+    font-size: clamp(2rem, 11vw, 3rem);
+    font-weight: 500;
+    line-height: 1.15;
+    text-align: right;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    font-variant-numeric: tabular-nums;
+    padding-bottom: 4px;
+}
+
+.expression-display::-webkit-scrollbar,
+.result-display::-webkit-scrollbar {
+    display: none;
+}
+
+/* ---------------- Teclado ---------------- */
+
+.buttons {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    border: none;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--btn-num);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: background 0.12s ease, transform 0.08s ease;
+}
+
+.btn:active {
+    transform: scale(0.94);
+    background: var(--btn-num-active);
+}
+
+.btn svg {
+    width: 26px;
+    height: 26px;
+}
+
+.btn.fn {
+    background: var(--btn-fn);
+    color: var(--accent);
+    font-size: 1.3rem;
+}
+
+.btn.fn:active {
+    background: var(--btn-fn-active);
+}
+
+.btn.op {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 1.8rem;
+}
+
+.btn.op:active {
+    background: var(--accent-soft-active);
+}
+
+.btn.eq {
+    background: var(--accent);
+    color: #07131a;
+    font-size: 1.9rem;
+    font-weight: 700;
+}
+
+.btn.eq:active {
+    background: #6fe3da;
+}
+
+/* ---------------- Animación de error ---------------- */
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(-7px); }
+    75%      { transform: translateX(7px); }
+}
+
+.result-display.shake {
+    animation: shake 0.28s ease;
+    color: #ff6b6b;
+}
+
+/* ---------------- Panel de historial ---------------- */
+
+.history-panel {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #131a26 0%, var(--panel-bg) 100%);
+    border-radius: 28px;
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.history-panel.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.history-header {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 14px 14px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.history-header h2 {
+    flex: 1;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.text-btn {
+    padding: 9px 14px;
+    border: none;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.12s ease;
+}
+
+.text-btn:active {
+    background: var(--accent-soft-active);
+}
+
+.history-list {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px;
+}
+
+.history-list::-webkit-scrollbar {
+    width: 0;
+}
+
+.history-empty {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    padding: 48px 20px;
+    line-height: 1.5;
+}
+
+.history-item {
+    padding: 12px 14px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.12s ease, transform 0.08s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.history-item:active {
+    background: rgba(255, 255, 255, 0.06);
+    transform: scale(0.98);
+}
+
+.history-item + .history-item {
+    margin-top: 2px;
+}
+
+.history-expr {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.history-result {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 2px;
+}
+
+/* ---------------- Adaptación a pantallas bajas ---------------- */
+
+@media (max-height: 680px) {
+    .calculator { padding: 10px 12px 16px; gap: 8px; }
+    .btn { height: 54px; border-radius: 16px; font-size: 1.35rem; }
+    .btn.op { font-size: 1.5rem; }
+    .btn.eq { font-size: 1.6rem; }
+    .result-display { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+    .expression-display { font-size: 0.95rem; }
+    .top-bar { height: 28px; }
+    .history-result { font-size: 1.15rem; }
+}
+
+@media (max-height: 560px) {
+    .btn { height: 46px; }
+    .display { min-height: 60px; }
+}

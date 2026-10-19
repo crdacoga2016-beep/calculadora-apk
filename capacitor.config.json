@@ -1,0 +1,9 @@
+{
+  "appId": "com.loco.calculadora",
+  "appName": "Calculadora",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

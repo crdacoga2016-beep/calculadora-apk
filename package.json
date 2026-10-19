@@ -1,0 +1,11 @@
+{
+  "name": "calculadora-apk",
+  "version": "1.0.0",
+  "description": "Calculadora con doble cero para Android",
+  "private": true,
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.0",
+    "@capacitor/android": "^6.1.0",
+    "@capacitor/core": "^6.1.0"
+  }
+}
