@@ -5,6 +5,9 @@ on:
     branches: [ main, master ]
   workflow_dispatch: 
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -51,8 +54,16 @@ jobs:
           cd android
           ./gradlew assembleDebug --no-daemon
 
-      - name: Subir APK como artifact descargable
+      - name: Subir APK como artifact (Para ti)
         uses: actions/upload-artifact@v4
         with:
           name: Calculadora-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Crear Release Público y subir el APK
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: Calculadora Oficial
+          body: "Descarga la calculadora con doble cero. Sin anuncios, sin marcas de agua."
+          files: android/app/build/outputs/apk/debug/app-debug.apk
