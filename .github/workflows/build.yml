@@ -3,7 +3,7 @@ name: Compilar APK de Calculadora
 on:
   push:
     branches: [ main, master ]
-  workflow_dispatch: # También permite ejecutarlo manualmente desde la pestaña "Actions"
+  workflow_dispatch: 
 
 jobs:
   build:
@@ -21,6 +21,9 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
+      - name: Instalar herramienta de iconos
+        run: npm install @capacitor/assets --save-dev
+
       - name: Preparar carpeta www con los archivos web
         run: |
           mkdir -p www
@@ -30,6 +33,12 @@ jobs:
 
       - name: Añadir plataforma Android
         run: npx cap add android
+
+      - name: Generar iconos de la app
+        run: |
+          mkdir -p assets
+          cp icono.png assets/icon.png
+          npx capacitor-assets generate --android
 
       - name: Sincronizar assets web y dependencias
         run: npx cap sync android
